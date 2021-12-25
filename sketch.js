@@ -34,11 +34,7 @@ function windowResized() {
 }
 
 function deviceTurned() {
-  if (turnAxis === 'X') {
-    resizeCanvas(displayHeight, displayWidth);
-  } else {
-    resizeCanvas(displayWidth, displayHeight);
-  }
+  resizeCanvas(windowWidth, windowHeight);
   init();
 }
 
@@ -82,6 +78,8 @@ function draw() {
   drawSwarm(swarmL);
   drawSwarm(swarmM);
   drawSwarm(swarmS);
+
+  text("HI", 20, 20);
 }
 
 function drawSwarm(swarm) {
