@@ -143,7 +143,6 @@ class Bubble {
   }
 }
 
-function touchStarted(event) {
+function touchStarted() {
   init();
-  return false;
 }
