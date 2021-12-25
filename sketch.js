@@ -34,7 +34,7 @@ function displayResized() {
 }
 
 function deviceTurned() {
-  if (deviceOrientation == 'portrait') {
+  if (deviceOrientation == PORTRAIT) {
     resizeCanvas(displayWidth, displayHeight);
   } else {
     resizeCanvas(displayHeight, displayWidth);
