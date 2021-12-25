@@ -21,31 +21,55 @@ var swarmS = [];
 var swarmM = [];
 var swarmL = [];
 
+var isSmartDevice;
+
 function setup() {
-  if (window.innerWidth / window.innerHeight > 1.0) {
-    createCanvas(displayWidth, displayHeight);
-  } else {
-    createCanvas(displayHeight, displayWidth);
-  }
-  
+
   colorMode(HSB);
-  
+
+  if (displayWidth < displayHeight) {
+    isSmartDevice = true;
+  } else {
+    isSmartDevice = false;
+  }
+
+  if (isSmartDevice) {
+    if (window.innerWidth / window.innerHeight < 1.0) {
+      createCanvas(displayWidth, displayHeight);
+    } else {
+      createCanvas(displayHeight, displayWidth);
+    }
+  } else {
+    createCanvas(windowWidth, windowHeight);
+  }
   init();
 }
 
 function deviceTurned() {
-  if (window.innerWidth / window.innerHeight > 1.0) {
-    resizeCanvas(displayWidth, displayHeight);
+  if (isSmartDevice) {
+    if (window.innerWidth / window.innerHeight < 1.0) {
+      resizeCanvas(displayWidth, displayHeight);
+    } else {
+      resizeCanvas(displayHeight, displayWidth);
+    }
   } else {
-    resizeCanvas(displayHeight, displayWidth);
+    resizeCanvas(windowWidth, windowHeight);
   }
   init();
 }
 
-// function displayResized() {
-//   resizeCanvas(displayWidth, displayHeight);
-//   init();
-// }
+ function windowResized() {
+  if (isSmartDevice) {
+    if (window.innerWidth / window.innerHeight < 1.0) {
+      resizeCanvas(displayWidth, displayHeight);
+    } else {
+      resizeCanvas(displayHeight, displayWidth);
+    }
+  } else {
+    resizeCanvas(windowWidth, windowHeight);
+  }
+  init();
+ }
 
 function init() {
 
