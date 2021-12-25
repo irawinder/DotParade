@@ -1,5 +1,5 @@
-const CANVAS_WIDTH = 400;
-const CANVAS_HEIGHT = 400;
+const IDEAL_CANVAS_WIDTH = 400;
+const IDEAL_CANVAS_HEIGHT = 400;
 const NUM_S = 350;
 const SIZE_S = 3;
 const ALPHA_S = 1;
@@ -22,16 +22,23 @@ var swarmM = [];
 var swarmL = [];
 
 function setup() {
-  createCanvas(CANVAS_WIDTH, CANVAS_HEIGHT);
+  createCanvas(windowWidth, windowHeight);
   colorMode(HSB);
   
   init();
 }
 
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  init();
+}
+
 function init() {
-  swarmS = initSwarm(NUM_S, SIZE_S, ALPHA_S);
-  swarmM = initSwarm(NUM_M, SIZE_M, ALPHA_M);
-  swarmL = initSwarm(NUM_L, SIZE_L, ALPHA_L);
+
+  let scaler = (windowWidth + windowHeight) / (IDEAL_CANVAS_WIDTH + IDEAL_CANVAS_HEIGHT);
+  swarmS = initSwarm(NUM_S, scaler * SIZE_S, ALPHA_S);
+  swarmM = initSwarm(NUM_M, scaler * SIZE_M, ALPHA_M);
+  swarmL = initSwarm(NUM_L, scaler * SIZE_L, ALPHA_L);
 }
 
 function initSwarm(numBubbles, size, alpha) {
