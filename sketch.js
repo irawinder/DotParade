@@ -22,7 +22,7 @@ var swarmM = [];
 var swarmL = [];
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(displayWidth, displayHeight);
   colorMode(HSB);
   
   init();
