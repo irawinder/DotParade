@@ -33,6 +33,11 @@ function windowResized() {
   init();
 }
 
+function deviceTurned() {
+  resizeCanvas(windowWidth, windowHeight);
+  init();
+}
+
 function init() {
 
   let scaler = (width + height) / (IDEAL_CANVAS_WIDTH + IDEAL_CANVAS_HEIGHT);
