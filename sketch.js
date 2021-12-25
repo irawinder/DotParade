@@ -34,7 +34,11 @@ function displayResized() {
 }
 
 function deviceTurned() {
-  resizeCanvas(displayWidth, displayHeight);
+  if (deviceOrientation == 'portrait') {
+    resizeCanvas(displayWidth, displayHeight);
+  } else {
+    resizeCanvas(displayHeight, displayWidth);
+  }
   init();
 }
 
