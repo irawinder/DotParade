@@ -144,6 +144,7 @@ class Bubble {
 }
 
 function touchStarted() {
-  let fs = fullscreen();
-  fullscreen(!fs);
+  init();
+  //let fs = fullscreen();
+  //fullscreen(!fs);
 }
