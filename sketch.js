@@ -143,6 +143,7 @@ class Bubble {
   }
 }
 
-function mousePressed() {
+function touchStarted(event) {
   init();
+  return false;
 }
