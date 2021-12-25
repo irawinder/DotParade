@@ -28,10 +28,10 @@ function setup() {
   init();
 }
 
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-  init();
-}
+// function windowResized() {
+//   resizeCanvas(windowWidth, windowHeight);
+//   init();
+// }
 
 function init() {
 
