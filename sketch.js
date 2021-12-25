@@ -22,6 +22,7 @@ var swarmM = [];
 var swarmL = [];
 
 var isSmartDevice;
+var phraseLocations = []; 
 
 function setup() {
 
@@ -77,6 +78,12 @@ function init() {
   swarmS = initSwarm(NUM_S, scaler * SIZE_S, ALPHA_S);
   swarmM = initSwarm(NUM_M, scaler * SIZE_M, ALPHA_M);
   swarmL = initSwarm(NUM_L, scaler * SIZE_L, ALPHA_L);
+
+  for (let i=0; i<4; i++) {
+    let x = random(50, width - 150);
+    let y = height/5 + i*(height - 100) / 4
+    phraseLocations[i] = createVector(x, y);
+  }
 }
 
 function initSwarm(numBubbles, size, alpha) {
@@ -112,7 +119,19 @@ function draw() {
   drawSwarm(swarmM);
   drawSwarm(swarmS);
 
-  text("HI 4", 20, 20);
+  fill(255, 0.7);
+  textSize(24);
+  textStyle(BOLD);
+  textFont('Helvetica');
+  text("Thank You", phraseLocations[0].x, phraseLocations[0].y);
+  text("I'm Sorry", phraseLocations[1].x, phraseLocations[1].y);
+  text("I Forgive You", phraseLocations[2].x, phraseLocations[2].y);
+  text("I Love You", phraseLocations[3].x, phraseLocations[3].y);
+}
+
+function randomText(words) {
+  
+  text(words, x, y);
 }
 
 function drawSwarm(swarm) {
