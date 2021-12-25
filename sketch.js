@@ -22,16 +22,16 @@ var swarmM = [];
 var swarmL = [];
 
 function setup() {
-  createCanvas(displayWidth, displayHeight);
+  createCanvas(windowWidth, windowHeight);
   colorMode(HSB);
   
   init();
 }
 
-// function windowResized() {
-//   resizeCanvas(windowWidth, windowHeight);
-//   init();
-// }
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  init();
+}
 
 function init() {
 
