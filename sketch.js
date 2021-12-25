@@ -12,7 +12,7 @@ const ALPHA_L = 0.5;
 const BG_COLOR = '#7563A8';
 const SATURATION = 50;
 const BRIGHTNESS = 255;
-const BUBBLE_REPEL_CONSTANT = .05;
+const BUBBLE_REPEL_CONSTANT = .1;
 const EDGE_REPEL_CONSTANT = 1;
 const MAX_SPEED = 1;
 const SPEED_DECAY = 0.9;
@@ -70,6 +70,7 @@ function draw() {
   }
   for (let bubble of swarmM) {
     bubble.addForces(swarmM);
+    bubble.addForces(swarmS);
     bubble.update();
   }
   
@@ -157,7 +158,7 @@ class Bubble {
     let d_y = this.location.y - bubble.location.y;
     let displacement = createVector(d_x, d_y);
     let distance = displacement.mag();
-    let forceMag = BUBBLE_REPEL_CONSTANT * this.w * bubble.w / sq(distance);
+    let forceMag = BUBBLE_REPEL_CONSTANT * this.w * bubble.w / pow(distance, 2.5);
     let force = displacement.setMag(forceMag);
     return force;
   }
