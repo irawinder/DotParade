@@ -35,7 +35,7 @@ function setup() {
 
 function init() {
 
-  let scaler = (windowWidth + windowHeight) / (IDEAL_CANVAS_WIDTH + IDEAL_CANVAS_HEIGHT);
+  let scaler = (width + height) / (IDEAL_CANVAS_WIDTH + IDEAL_CANVAS_HEIGHT);
   swarmS = initSwarm(NUM_S, scaler * SIZE_S, ALPHA_S);
   swarmM = initSwarm(NUM_M, scaler * SIZE_M, ALPHA_M);
   swarmL = initSwarm(NUM_L, scaler * SIZE_L, ALPHA_L);
