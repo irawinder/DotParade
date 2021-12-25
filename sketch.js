@@ -16,17 +16,28 @@ const BUBBLE_REPEL_CONSTANT = .05;
 const EDGE_REPEL_CONSTANT = 1;
 const MAX_SPEED = 1;
 const SPEED_DECAY = 0.9;
+const IDEAL_TEXT_SIZE = 18;
+const TEXT_FONT = 'Helvetica';
+const TEXT_FILL = 255;
+const TEXT_ALPHA = 0.7;
+const PHRASE_MARGIN = 90;
 
 var swarmS = [];
 var swarmM = [];
 var swarmL = [];
-
+var phrases = [];
+var bubbleScaler;
+var textScaler;
 var isSmartDevice;
-var phraseLocations = []; 
 
 function setup() {
 
   colorMode(HSB);
+
+  phrases[0] = new Phrase("Thank You");
+  phrases[1] = new Phrase("I'm Sorry");
+  phrases[2] = new Phrase("Please Forgive Me");
+  phrases[3] = new Phrase("I Love You");
 
   if (displayWidth < displayHeight) {
     isSmartDevice = true;
@@ -46,43 +57,40 @@ function setup() {
   init();
 }
 
-function deviceTurned() {
-  if (isSmartDevice) {
-    if (window.innerWidth / window.innerHeight < 1.0) {
-      resizeCanvas(displayWidth, displayHeight);
-    } else {
-      resizeCanvas(displayHeight, displayWidth);
-    }
-  } else {
-    resizeCanvas(windowWidth, windowHeight);
-  }
-  init();
-}
+function draw() {
 
- function windowResized() {
-  if (isSmartDevice) {
-    if (window.innerWidth / window.innerHeight < 1.0) {
-      resizeCanvas(displayWidth, displayHeight);
-    } else {
-      resizeCanvas(displayHeight, displayWidth);
-    }
-  } else {
-    resizeCanvas(windowWidth, windowHeight);
+  // Set background color
+  background(BG_COLOR);
+  
+  // Update Positions
+  for (let bubble of swarmS) {
+    bubble.addForces(swarmS);
+    bubble.addForces(swarmM);
+    bubble.update();
   }
-  init();
- }
+  for (let bubble of swarmM) {
+    bubble.addForces(swarmM);
+    bubble.update();
+  }
+  
+  // Draw everything to canvas
+  drawSwarm(swarmL);
+  drawSwarm(swarmM);
+  drawSwarm(swarmS);
+  drawPhrases(phrases);
+}
 
 function init() {
 
-  let scaler = (width + height) / (IDEAL_CANVAS_WIDTH + IDEAL_CANVAS_HEIGHT);
-  swarmS = initSwarm(NUM_S, scaler * SIZE_S, ALPHA_S);
-  swarmM = initSwarm(NUM_M, scaler * SIZE_M, ALPHA_M);
-  swarmL = initSwarm(NUM_L, scaler * SIZE_L, ALPHA_L);
+  bubbleScaler = (width + height) / (IDEAL_CANVAS_WIDTH + IDEAL_CANVAS_HEIGHT);
+  textScaler = height / IDEAL_CANVAS_HEIGHT;
+  swarmS = initSwarm(NUM_S, bubbleScaler * SIZE_S, ALPHA_S);
+  swarmM = initSwarm(NUM_M, bubbleScaler * SIZE_M, ALPHA_M);
+  swarmL = initSwarm(NUM_L, bubbleScaler * SIZE_L, ALPHA_L);
 
-  for (let i=0; i<4; i++) {
-    let x = random(50, width - 150);
-    let y = height/5 + i*(height - 100) / 4
-    phraseLocations[i] = createVector(x, y);
+  for (let i=0; i<phrases.length; i++) {
+    phrases[i].location.x = random(textScaler * PHRASE_MARGIN, width - textScaler * PHRASE_MARGIN);
+    phrases[i].location.y = (1 + i) * height / (phrases.length + 1);
   }
 }
 
@@ -101,37 +109,15 @@ function initSwarm(numBubbles, size, alpha) {
   return bubbles;
 }
 
-function draw() {
-  background(BG_COLOR);
-  
-  for (let bubble of swarmS) {
-    bubble.addForces(swarmS);
-    bubble.addForces(swarmM);
-    bubble.update();
-  }
-  
-  for (let bubble of swarmM) {
-    bubble.addForces(swarmM);
-    bubble.update();
-  }
-  
-  drawSwarm(swarmL);
-  drawSwarm(swarmM);
-  drawSwarm(swarmS);
-
-  fill(255, 0.7);
-  textSize(24);
+function drawPhrases(phrases) {
+  fill(TEXT_FILL, TEXT_ALPHA);
+  textSize(textScaler * IDEAL_TEXT_SIZE);
   textStyle(BOLD);
-  textFont('Helvetica');
-  text("Thank You", phraseLocations[0].x, phraseLocations[0].y);
-  text("I'm Sorry", phraseLocations[1].x, phraseLocations[1].y);
-  text("I Forgive You", phraseLocations[2].x, phraseLocations[2].y);
-  text("I Love You", phraseLocations[3].x, phraseLocations[3].y);
-}
-
-function randomText(words) {
-  
-  text(words, x, y);
+  textFont(TEXT_FONT);
+  textAlign(CENTER, CENTER);
+  for (let phrase of phrases) {
+    text(phrase.phrase, phrase.location.x, phrase.location.y);
+  }
 }
 
 function drawSwarm(swarm) {
@@ -202,8 +188,42 @@ class Bubble {
   }
 }
 
+class Phrase {
+  constructor(phrase) {
+    this.phrase = phrase;
+    this.location = createVector(0, 0)
+  }
+
+  setX(x) {
+    this.location.x = x;
+  }
+
+  setY(y) {
+    this.location.y = y;
+  }
+}
+
 function touchStarted() {
   init();
-  //let fs = fullscreen();
-  //fullscreen(!fs);
+}
+
+function deviceTurned() {
+  resize();
+}
+
+function windowResized() {
+  resize();
+}
+
+function resize() {
+  if (isSmartDevice) {
+    if (window.innerWidth / window.innerHeight < 1.0) {
+      resizeCanvas(displayWidth, displayHeight);
+    } else {
+      resizeCanvas(displayHeight, displayWidth);
+    }
+  } else {
+    resizeCanvas(windowWidth, windowHeight);
+  }
+  init();
 }
