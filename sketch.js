@@ -22,19 +22,19 @@ var swarmM = [];
 var swarmL = [];
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(displayWidth, displayHeight);
   colorMode(HSB);
   
   init();
 }
 
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
+function displayResized() {
+  resizeCanvas(displayWidth, displayHeight);
   init();
 }
 
 function deviceTurned() {
-  resizeCanvas(windowWidth, windowHeight);
+  resizeCanvas(displayWidth, displayHeight);
   init();
 }
 
