@@ -112,7 +112,7 @@ function draw() {
   drawSwarm(swarmM);
   drawSwarm(swarmS);
 
-  text("HI3", 20, 20);
+  text("HI 4", 20, 20);
 }
 
 function drawSwarm(swarm) {
