@@ -34,7 +34,11 @@ function windowResized() {
 }
 
 function deviceTurned() {
-  resizeCanvas(windowWidth, windowHeight);
+  if (turnAxis === 'Y') {
+    resizeCanvas(windowHeight, windowWidth);
+  } else {
+    resizeCanvas(windowWidth, windowHeight);
+  }
   init();
 }
 
