@@ -34,7 +34,7 @@ function displayResized() {
 }
 
 function deviceTurned() {
-  if (deviceOrientation == PORTRAIT) {
+  if (deviceOrientation === PORTRAIT) {
     resizeCanvas(displayWidth, displayHeight);
   } else {
     resizeCanvas(displayHeight, displayWidth);
@@ -83,7 +83,7 @@ function draw() {
   drawSwarm(swarmM);
   drawSwarm(swarmS);
 
-  text("HI2", 20, 20);
+  //text("HI2", 20, 20);
 }
 
 function drawSwarm(swarm) {
