@@ -22,25 +22,30 @@ var swarmM = [];
 var swarmL = [];
 
 function setup() {
-  createCanvas(displayWidth, displayHeight);
+  if (window.innerWidth / window.innerHeight > 1.0) {
+    createCanvas(displayWidth, displayHeight);
+  } else {
+    createCanvas(displayHeight, displayWidth);
+  }
+  
   colorMode(HSB);
   
   init();
 }
 
-function displayResized() {
-  resizeCanvas(displayWidth, displayHeight);
-  init();
-}
-
 function deviceTurned() {
-  if (deviceOrientation === PORTRAIT) {
+  if (window.innerWidth / window.innerHeight > 1.0) {
     resizeCanvas(displayWidth, displayHeight);
   } else {
     resizeCanvas(displayHeight, displayWidth);
   }
   init();
 }
+
+// function displayResized() {
+//   resizeCanvas(displayWidth, displayHeight);
+//   init();
+// }
 
 function init() {
 
@@ -83,7 +88,7 @@ function draw() {
   drawSwarm(swarmM);
   drawSwarm(swarmS);
 
-  //text("HI2", 20, 20);
+  text("HI3", 20, 20);
 }
 
 function drawSwarm(swarm) {
