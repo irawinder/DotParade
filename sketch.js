@@ -143,6 +143,6 @@ class Bubble {
   }
 }
 
-function keyPressed() {
+function mousePressed() {
   init();
 }
