@@ -79,7 +79,7 @@ function draw() {
   drawSwarm(swarmM);
   drawSwarm(swarmS);
 
-  text("HI", 20, 20);
+  text("HI2", 20, 20);
 }
 
 function drawSwarm(swarm) {
