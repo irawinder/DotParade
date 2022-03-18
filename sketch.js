@@ -34,9 +34,9 @@ function setup() {
 
   colorMode(HSB);
 
-  phrases[0] = new Phrase("Thank You");
-  phrases[1] = new Phrase("I'm Sorry");
-  phrases[2] = new Phrase("Please Forgive Me");
+  phrases[0] = new Phrase("I'm Sorry");
+  phrases[1] = new Phrase("Please Forgive Me");
+  phrases[2] = new Phrase("Thank You");
   phrases[3] = new Phrase("I Love You");
 
   if (displayWidth < displayHeight) {
