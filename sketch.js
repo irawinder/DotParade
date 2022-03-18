@@ -91,7 +91,7 @@ function init() {
 
   for (let i=0; i<phrases.length; i++) {
     phrases[i].location.x = random(textScaler * PHRASE_MARGIN, width - textScaler * PHRASE_MARGIN);
-    phrases[i].location.y = (1 + i) * height / (phrases.length + 1);
+    phrases[i].location.y = (1 + i) * height / (phrases.length + 1) - textScaler * IDEAL_TEXT_SIZE;
   }
 }
 

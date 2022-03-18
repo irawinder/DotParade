@@ -1,2 +1,2 @@
-# dotParade
- Miwa's Dot Parade
+# H'oponopono
+ Miwa's Ho'oponopono
